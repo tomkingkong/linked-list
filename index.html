@@ -5,24 +5,25 @@
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-  <div class="header-section"><h1>Linked<span><img src="images/linked-list-logo.svg" alt="linked list logo"></span>List</h1>
-  <input type="text" name="Website Title" placeholder="Website Title">
-  <input type="text" name="Website URL" placeholder="Website URL">
-  <button>Enter</button>
+  <div class="header-section">
+    <h1>Linked<span><img src="images/linked-list-logo.svg" alt="linked list logo"></span>List</h1>
+    <input type="text" name="Website Title" placeholder="Website Title" id="website-title-input">
+    <input type="text" name="Website URL" placeholder="Website URL" id="website-url-input">
+    <button>Enter</button>
   </div>
 
   <section>
     <div class="bookmark-block">
-      <h2>The Website Title</h2>
-      <p>www.thewebsiteurl.com</p>
+      <h2 id="website-title">The Website Title</h2>
+      <p id="website-url">www.thewebsiteurl.com</p>
       <div class="read-and-delete">
-        <h3>Read</h3>
-        <h3>Delete</h3>
+        <h3 id="read-button">Read</h3>
+        <h3 id="delete-button">Delete</h3>
       </div>
     </div>
 
   </section>
 
 </body>
-<script type="text/javascript" href="script.js"></script>
+<script type="text/javascript" src="script.js"></script>
 </html>
