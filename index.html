@@ -3,27 +3,63 @@
 <head>
   <title>Linked List</title>
   <link rel="stylesheet" type="text/css" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800" rel="stylesheet">
 </head>
 <body>
-  <div class="header-section">
-    <h1>Linked<span><img src="images/linked-list-logo.svg" alt="linked list logo"></span>List</h1>
-    <input type="text" name="Website Title" placeholder="Website Title" id="website-title-input">
-    <input type="text" name="Website URL" placeholder="Website URL" id="website-url-input">
-    <button>Enter</button>
-  </div>
-
-  <section>
-    <div class="bookmark-block">
-      <h2 id="website-title">The Website Title</h2>
-      <p id="website-url">www.thewebsiteurl.com</p>
-      <div class="read-and-delete">
-        <h3 id="read-button">Read</h3>
-        <h3 id="delete-button">Delete</h3>
+  <div class="wrapper">
+    <header>
+      <div class="link-form">
+        <h1>Linked<span><img src="images/linked-list-logo.svg" alt="linked list logo"></span>List</h1>
+        <form>
+          <input type="text" name="Website Title" placeholder="Website Title" id="website-title-input">
+          <input type="text" name="Website URL" placeholder="Website URL" id="website-url-input">
+          <button>Enter</button>
+        </form>
       </div>
-    </div>
-
-  </section>
-
+    </header>
+    <main>
+      <section class="bookmark-block">
+        <h2 id="website-title">The Website Title</h2>
+        <p id="website-url"><a href="#">www.thewebsiteurl.com</a></p>
+        <div class="read-and-delete">
+          <button class="read-button">Read</button>
+          <button class="delete-button">Delete</button>
+        </div>
+      </section>
+      <section class="bookmark-block">
+        <h2 id="website-title">The Website Title</h2>
+        <p id="website-url">www.thewebsiteurl.com</p>
+        <div class="read-and-delete">
+          <button class="read-button">Read</button>
+          <button class="delete-button">Delete</button>
+        </div>
+      </section>
+      <section class="bookmark-block">
+        <h2 id="website-title">The Website Title</h2>
+        <p id="website-url">www.thewebsiteurl.com</p>
+        <div class="read-and-delete">
+          <button class="read-button">Read</button>
+          <button class="delete-button">Delete</button>
+        </div>
+      </section>
+      <section class="bookmark-block">
+        <h2 id="website-title">The Website Title</h2>
+        <p id="website-url">www.thewebsiteurl.com</p>
+        <div class="read-and-delete">
+          <button class="read-button">Read</button>
+          <button class="delete-button">Delete</button>
+        </div>
+      </section>
+      <section class="bookmark-block">
+          <h2 id="website-title">The Website Title</h2>
+          <p id="website-url">www.thewebsiteurl.com</p>
+          <div class="read-and-delete">
+            <button class="read-button">Read</button>
+            <button class="delete-button">Delete</button>
+          </div>
+      </section>
+    </main>
+  </div>
 </body>
 <script type="text/javascript" src="script.js"></script>
 </html>
