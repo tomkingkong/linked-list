@@ -201,6 +201,10 @@ main article p a:hover {
   text-decoration: underline #cfd8dc;
 }
 
+.delete-button {
+  background-color: transparent;
+}
+
 @media only screen and (min-width: 550px) {
   .wrapper {
     grid-template-columns: 20em 1fr;

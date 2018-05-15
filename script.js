@@ -2,12 +2,15 @@ var websiteTitleInput = document.querySelector('.website-title-input');
 var websiteUrlInput = document.querySelector('.website-url-input');
 var addToList = document.querySelector('.submit');
 var readButton = document.querySelector('.read-button');
-var deleteButton = document.querySelector('.delete-button');
+
 var websiteTitle = document.querySelector('.website-title');
 var websiteUrl = document.querySelector('.website-url');
 var bookList = document.querySelector('.bookmark-section');
 var read = document.querySelector('.read');
 var linkedList = [];
+var listItemsFromStorage = JSON.parse(localStorage.getItem('list'));
+// console.log(listItemsFromStorage);
+// console.log(listItemsFromStorage[0].title, listItemsFromStorage[0].url);
 
 function ListItem(title, url) {
   this.title = title;
@@ -29,21 +32,20 @@ addToList.addEventListener('click', function () {
   event.preventDefault();
   var websiteTitleValue = websiteTitleInput.value;
   var websiteUrlValue = websiteUrlInput.value;
+  //create new list item with user arguments
   var list = new ListItem(websiteTitleValue, websiteUrlValue);
   // console.log(list);
 
+  //push new list item to linkedList array in DOM
   linkedList.push(list);
-  console.log(linkedList);
+  // console.log(linkedList);
 
+  //stringify and set linkedList array to localStorage
   var listItemsStringed = JSON.stringify(linkedList);
-  console.log(listItemsStringed);
-
+  // console.log(listItemsStringed);
   localStorage.setItem('list', listItemsStringed);
 
-  var listItemsFromStorage = JSON.parse(localStorage.getItem('list'));
-  console.log(listItemsFromStorage);
-  console.log(listItemsFromStorage[0].title, listItemsFromStorage[0].url);
-
+  //what he said
   formatArrayAddToBookarkList();
 });
 
@@ -62,8 +64,17 @@ var formatArrayAddToBookarkList = function () {
     bookList.innerHTML = bookmarkCard;
   }
 }
+// var deleteButton = document.querySelector('.delete-button');
+// deleteButton.addEventListener('click', deleteBookmark);
 
-$("button.delete-button").on("click", function () {
+// var deleteBookmark = function () {
+//   deleteButton = document.querySelector('.delete-button');
+//   console.log('hey you deleted');
+// }
+
+
+
+$("main").on("click", ".delete-button", function () {
   console.log('you did it');
 })
 
