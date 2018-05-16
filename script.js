@@ -93,7 +93,7 @@ var addItemToBookmarkList = function() {
       linkedList[i].url
     }</a></p>
 <div class="read-and-delete">
-  <button class="read-button" id="read">Read</button>
+  <button class="read-button" id="${linkedList[i].id}">Read</button>
   <button class="delete-button" id="${linkedList[i].id}">Delete</button>
 </div>
 </article>`;
@@ -132,11 +132,52 @@ $('main').on('click', '.read-button', function() {
   $(this)
     .closest('article')
     .toggleClass('read');
+
+  var thisObjId = this.id;
+  console.log(thisObjId);
+  // var updatedList = linkedList.find(function(obj) {
+  //   console.log(thisObjId);
+  //   return obj.id == thisObjId;
+  // });
+  var itemUpdate = linkedList.find(function(obj) {
+    if (obj.id == thisObjId) {
+      obj.isRead = !obj.isRead;
+      console.log(obj);
+      return obj;
+    }
+  });
+
+  var updatedList = linkedList.filter(function(obj) {
+    return obj.id != thisObjId;
+  });
+
+  linkedList = updatedList;
+
+  linkedList.push(itemUpdate);
+
+  var listItemsStringed = JSON.stringify(linkedList);
+  localStorage.setItem('list', listItemsStringed);
+
   $('h5').text('Read: ' + $('.read').length);
   $('h6').text(
     'Unread: ' + (parseInt(linkedList.length) - parseInt($('.read').length))
   );
 });
+
+$('.clear-read').on('click', clearAllRead);
+
+function clearAllRead() {
+  var listFromStorage = JSON.parse(localStorage.getItem('list'));
+
+  var unreadList = listFromStorage.filter(function(obj) {
+    return obj.isRead == false;
+  });
+
+  linkedList = unreadList;
+
+  var listItemsStringed = JSON.stringify(linkedList);
+  localStorage.setItem('list', listItemsStringed);
+}
 
 function validationProcess() {
   var theUrl = document.querySelector('.website-url-input').value;
