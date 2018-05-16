@@ -44,15 +44,18 @@ $(window).on('storage', function() {
 
 $('form').on('submit', function(event) {
   event.preventDefault();
-  addListToStorage();
-  addItemToBookmarkList();
-  clearForm();
-
-  $('h4').text('Bookmarks: ' + linkedList.length);
-  $('h5').text('Read: ' + $('.read').length);
-  $('h6').text(
-    'Unread: ' + (parseInt(linkedList.length) - parseInt($('.read').length))
-  );
+  if (validationProcess() === true) {
+    addListToStorage();
+    addItemToBookmarkList();
+    clearForm();
+    $('h4').text('Bookmarks: ' + linkedList.length);
+    $('h5').text('Read: ' + $('.read').length);
+    $('h6').text(
+      'Unread: ' + (parseInt(linkedList.length) - parseInt($('.read').length))
+    );
+  } else {
+    return false;
+  }
 });
 
 function addListToStorage() {
@@ -135,4 +138,16 @@ $('main').on('click', '.read-button', function() {
   );
 });
 
-//TODO:add total read/unr ead bookmarks
+function validationProcess() {
+  var theUrl = document.querySelector('.website-url-input').value;
+  var pattern = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+  if (websiteUrlInput.value === '' || websiteTitleInput.value === '') {
+    alert('ERROR: Please enter Bookmark Information');
+    return false;
+  } else if (pattern.test(theUrl)) {
+    return true;
+  } else {
+    alert('Url is not valid!');
+    return false;
+  }
+}

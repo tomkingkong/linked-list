@@ -36,6 +36,9 @@ h3 {
 h4 {
   color: #ffc107;
 }
+h5 {
+  color: #ffc107;
+}
 .wrapper {
   display: grid;
   min-height: 100vh;
@@ -103,6 +106,7 @@ input {
 }
 
 main article {
+  overflow: hidden;
   font-size: 1em;
   max-width: 90vw;
   margin: 3% auto;
@@ -113,11 +117,11 @@ main article {
 }
 
 main article p {
+ 
   color: #607d8b;
   padding: 1em 0;
   border-top: 1px solid #cfd8dc;
   border-bottom: 1px solid #cfd8dc;
-  overflow: hidden;
   width: 100%;
 }
 
@@ -132,6 +136,7 @@ main article p a:hover {
   color: #455a64;
   text-decoration: underline #ffc107;
 }
+
 
 .read-and-delete {
   color: #455a64;
@@ -219,6 +224,7 @@ main article p a:hover {
  }
  main article {
    margin: 3% 0;
+
  }
 }
 
@@ -230,6 +236,7 @@ main article p a:hover {
   }
   main article {
     width: 90%;
+
   }
 }
 
