@@ -2,7 +2,6 @@ var websiteTitleInput = document.querySelector('.website-title-input');
 var websiteUrlInput = document.querySelector('.website-url-input');
 var addToList = document.querySelector('.submit');
 var readButton = document.querySelector('.read-button');
-
 var websiteTitle = document.querySelector('.website-title');
 var websiteUrl = document.querySelector('.website-url');
 var bookList = document.querySelector('.bookmark-section');
@@ -23,8 +22,7 @@ function ListItem(title, url) {
   //   }
 }
 
-
-addToList.addEventListener('click', validationProcess) 
+addToList.addEventListener('click', validationProcess);
 
 function validationProcess() {
   var theUrl = document.querySelector('.website-url-input').value;
@@ -78,7 +76,6 @@ var clearForm = function () {
   websiteUrlInput.value = '';
 }
 
-
 var formatArrayAddToBookarkList = function () {
   var bookmarkCard = '';
   for (var i = 0; i < linkedList.length; i++) {
@@ -91,7 +88,6 @@ var formatArrayAddToBookarkList = function () {
       </div>
       </article>`);
     bookList.innerHTML = bookmarkCard;
-
   }
 }
 
@@ -99,7 +95,7 @@ var formatArrayAddToBookarkList = function () {
 //event listener on delete button click
 $('main').on('click', '.delete-button', function (event) {
   var thisObjId = this.id;
-  console.log(thisObjId);
+  // console.log(thisObjId);
   //remove bookmark from page
   $(this).closest('article').remove('article');
 
@@ -107,8 +103,7 @@ $('main').on('click', '.delete-button', function (event) {
   var updatedList = linkedList.filter(function (obj) {
     return obj.id != thisObjId;
   });
-  console.log(updatedList);
-
+  // console.log(updatedList);
   linkedList = updatedList;
   //stringify and set linkedList array to localStorage
   var listItemsStringed = JSON.stringify(linkedList);
@@ -124,13 +119,11 @@ function findArrayIndex(array, attr, value) {
     if (array[i][attr] === value) {
       console.log('yup');
       return i;
-
     }
   }
   console.log('nah');
   return -1;
 }
-
 
 //mark as read
 $('main').on('click', '.read-button', function () {
@@ -150,103 +143,4 @@ $('main').on('click', '.delete-button', function () {
   total--;
   $('h4').text('Total: ' + total);
 })
-//TODO:add total read/unr ead bookmarks
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// function Node(data) {
-//   this.data = data;
-//   this.next = null;
-// }
-
-// function LinkedList() {
-//   this._length = 0;
-//   this.head = null;
-// }
-
-// LinkedList.prototype.add = function(value) {
-//   var node = new Node(value),
-//     currentNode = this.head;
-
-//     //first use case - empty list
-//     if(!currentNode) {
-//       this.head = node;
-//       this._length++;
-
-//       return node;
-//     }
-
-//     //second case - non empty list
-//     while (currentNode.next) {
-//       currentNode = currentNode.next;
-//     }
-//     this.length++;
-
-//     return node;
-// }
-
-// LinkedList.prototype.searchNodeAt = function(position) {
-//   var currentNode = this.head,
-//       length = this._length,
-//       count = 1,
-//       message = {failure: 'Failure: Node Does Not Exist In This List.'};
-
-//       //first case - invalid position
-//       if (length === 0 || position < 1 || position > length) {
-//         throw new Error(message.failure);
-//       }
-//       while (count < position) {
-//         currentNode = currentNode.next;
-//         count++;
-//       }
-//       return currentNode;
-// }
-
-// LinkedList.prototype.remove = function(position) {
-//   var currentNode = this.head,
-//       length = this._length,
-//       count = 0,
-//       message = {failure: 'Failure: Node Does Not Exist In This List.'},
-//       beforeNodeToDelete = null,
-//       nodeToDelete = null,
-//       deletedNode = null;
-
-//       //first case - invalid position
-//       if (position < 0 || position > length) {
-//         throw new Error(message.failure);
-//       }
-//       //second case - first node removed
-//       if (position === 1) {
-//         this.head = currentNode.next;
-//         deletedNode = currentNode;
-//         currentNode = null;
-//         this._length--;
-
-//         return deletedNode;
-//       }
-//       //third case - any other node removed
-//       while (count < position) {
-//         beforeNodeToDelete = currentNode;
-//         nodeToDelete = currentNode.next;
-//         count++;
-//       }
-//       beforeNodeToDelete.next = nodeToDelete.next;
-//       deletedNode = nodeToDelete;
-//       nodeToDelete = null;
-//       this._length--;
-
-//       return deletedNode;
-// }
