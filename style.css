@@ -164,7 +164,7 @@ main article p a:hover {
   background-color: #F2F4F4;
 }
 
-.read #read {
+.read .readit {
   outline: 0;
   border: 0;
   color: #F05A28; 

@@ -26,9 +26,6 @@ function ListItem(title, url) {
   this.url = url;
   this.id = Date.now();
   this.isRead = false;
-  //   if ($(this).hasClass('read') === true) {
-  //     this.isRead = true;
-  //   }
 }
 
 $(document).ready(function() {
@@ -93,7 +90,7 @@ var addItemToBookmarkList = function() {
       linkedList[i].url
     }</a></p>
 <div class="read-and-delete">
-  <button class="read-button" id="${linkedList[i].id}">Read</button>
+  <button class="read-button readit" id="${linkedList[i].id}">Read</button>
   <button class="delete-button" id="${linkedList[i].id}">Delete</button>
 </div>
 </article>`;
@@ -134,15 +131,11 @@ $('main').on('click', '.read-button', function() {
     .toggleClass('read');
 
   var thisObjId = this.id;
-  console.log(thisObjId);
-  // var updatedList = linkedList.find(function(obj) {
-  //   console.log(thisObjId);
-  //   return obj.id == thisObjId;
-  // });
+
   var itemUpdate = linkedList.find(function(obj) {
     if (obj.id == thisObjId) {
       obj.isRead = !obj.isRead;
-      console.log(obj);
+
       return obj;
     }
   });
