@@ -23,6 +23,8 @@ function ListItem(title, url) {
 }
 
 addToList.addEventListener('click', validationProcess);
+websiteTitleInput.addEventListener('keyup', submitEnable);
+websiteUrlInput.addEventListener('keyup', submitEnable);
 
 function validationProcess() {
   var theUrl = document.querySelector('.website-url-input').value;
@@ -143,4 +145,13 @@ $('main').on('click', '.delete-button', function () {
   total--;
   $('h4').text('Total: ' + total);
 })
+
+function submitEnable() {
+ var inputLength = (websiteTitleInput.value.length * websiteUrlInput.value.length);
+  if (inputLength === 0) {
+    addToList.disabled = true;
+  } else {
+    addToList.disabled = false;
+  };
+};
 
