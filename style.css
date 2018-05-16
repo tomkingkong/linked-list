@@ -106,7 +106,6 @@ input {
 }
 
 main article {
-  overflow: hidden;
   font-size: 1em;
   max-width: 90vw;
   margin: 3% auto;
@@ -117,7 +116,7 @@ main article {
 }
 
 main article p {
- 
+  height: auto;
   color: #607d8b;
   padding: 1em 0;
   border-top: 1px solid #cfd8dc;
