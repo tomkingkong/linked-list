@@ -13,9 +13,8 @@ var bookmarkAmount = document.querySelector('h4');
 var read = document.querySelector('.read');
 
 var linkedList = [];
-var totalBookmarks = linkedList.length;
-
-var total = 0;
+//Tom was here
+var total = ;
 
 
 //total bookmark TODO:fix total bookmark update
