@@ -33,6 +33,9 @@ h3 {
   display: flex;
   justify-content: center;
 }
+h4 {
+  color: #ffc107;
+}
 .wrapper {
   display: grid;
   min-height: 100vh;
