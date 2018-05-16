@@ -24,8 +24,33 @@ function ListItem(title, url) {
 }
 
 
+addToList.addEventListener('click', validationProcess) 
 
-addToList.addEventListener('click', function () {
+function validationProcess() {
+  var theUrl = document.querySelector('.website-url-input').value;
+  var pattern = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+  if (websiteUrlInput.value === '' || websiteTitleInput.value === '') {
+    alert("ERROR: Please enter Bookmark Information");
+  } else if (pattern.test(theUrl)) {
+    createBookmarkProcess();
+  } else {
+    alert("Url is not valid!");
+    return false;
+  }
+}
+
+function validate() {
+  var theUrl = document.querySelector('.website-url-input').value;
+  var pattern = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+  if (pattern.test(theUrl)) {
+    return true;
+  } 
+  alert("Url is not valid!");
+  return false;
+  
+}
+
+function createBookmarkProcess () {
   event.preventDefault();
   var websiteTitleValue = websiteTitleInput.value;
   var websiteUrlValue = websiteUrlInput.value;
@@ -40,7 +65,7 @@ addToList.addEventListener('click', function () {
   //what he said
   formatArrayAddToBookarkList();
   clearForm();
-});
+};
 
 var updateListDomPlusStorage = function () {
   var list = linkedList.push(list);
@@ -58,13 +83,13 @@ var formatArrayAddToBookarkList = function () {
   var bookmarkCard = '';
   for (var i = 0; i < linkedList.length; i++) {
     bookmarkCard += (`<article class="bookmark-block">
-<h2 class="website-title">${linkedList[i].title}</h2>
-<p class="website-url"><a href="${linkedList[i].url}">${linkedList[i].url}</a></p>
-<div class="read-and-delete">
-  <button class="read-button" id="read">Read</button>
-  <button class="delete-button" id="${linkedList[i].id}">Delete</button>
-</div>
-</article>`);
+      <h2 class="website-title">${linkedList[i].title}</h2>
+      <p class="website-url"><a href="${linkedList[i].url}">${linkedList[i].url}</a></p>
+      <div class="read-and-delete">
+      <button class="read-button" id="read">Read</button>
+      <button class="delete-button" id="${linkedList[i].id}">Delete</button>
+      </div>
+      </article>`);
     bookList.innerHTML = bookmarkCard;
 
   }
