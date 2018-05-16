@@ -13,12 +13,10 @@ var bookmarkAmount = document.querySelector('h4');
 var read = document.querySelector('.read');
 
 var linkedList = [];
-//Tom was here
-var total = ;
 
 
 //total bookmark TODO:fix total bookmark update
-$('h4').text('Bookmarks: ' + total);
+$('h4').text('Bookmarks: ' + linkedList.length);
 
 function ListItem(title, url) {
   this.title = title;
@@ -47,9 +45,8 @@ $('form').on('submit', function (event) {
   addItemToBookmarkList();
   clearForm();
 
-  //increase total bookmarks
-  // total++;
-  // $('h4').text('Bookmarks: ' + total);
+
+  $('h4').text('Bookmarks: ' + linkedList.length);
 });
 
 function addListToStorage() {
@@ -69,27 +66,6 @@ function getListItemsAndAdd() {
   $('h4').text('Bookmarks: ' + linkedList.length);
 
 }
-
-// addToList.addEventListener('click', function (event) {
-//   event.preventDefault();
-//   var websiteTitleValue = websiteTitleInput.value;
-//   var websiteUrlValue = websiteUrlInput.value;
-//   //create new list item with user arguments
-//   var list = new ListItem(websiteTitleValue, websiteUrlValue);
-//   // console.log(list);
-//   //push new list item to linkedList array in DOM
-//   linkedList.push(list);
-//   //stringify and set linkedList array to localStorage
-//   var listItemsStringed = JSON.stringify(linkedList);
-//   localStorage.setItem('list', listItemsStringed);
-//   //what he said
-//   addArrayItemToBookmarkList();
-//   clearForm();
-//   //increase total bookmarks
-//   total++;
-//   $('h4').text('Bookmarks: ' + total);
-// });
-
 
 var clearForm = function () {
   websiteTitleInput.value = '';
@@ -128,22 +104,8 @@ $('main').on('click', '.delete-button', function (event) {
   var listItemsStringed = JSON.stringify(linkedList);
   localStorage.setItem('list', listItemsStringed);
 
-  total--;
-  $('h4').text('Bookmarks: ' + total);
+  $('h4').text('Bookmarks: ' + linkedList.length);
 })
-
-
-function findArrayIndex(array, attr, value) {
-  for (var i = 0; i < linkedList.length; i += 1) {
-    if (array[i][attr] === value) {
-      console.log('yup');
-      return i;
-    }
-  }
-  console.log('nah');
-  return -1;
-}
-
 
 //mark as read
 $('main').on('click', '.read-button', function () {
