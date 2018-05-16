@@ -23,7 +23,24 @@ function ListItem(title, url) {
   //   }
 }
 
+$(document).ready(function () {
+  console.log(listItemsFromStorage);
+  listItemsFromStorage = linkedList;
+  var bookmarkCard = '';
+  for (var i = 0; i < linkedList.length; i++) {
+    bookmarkCard += (`<article class="bookmark-block">
+<h2 class="website-title">${linkedList[i].title}</h2>
+<p class="website-url"><a href="${linkedList[i].url}">${linkedList[i].url}</a></p>
+<div class="read-and-delete">
+  <button class="read-button" id="read">Read</button>
+  <button class="delete-button" id="${linkedList[i].id}">Delete</button>
+</div>
+</article>`);
+    bookList.innerHTML = bookmarkCard;
 
+  }
+
+})
 
 addToList.addEventListener('click', function () {
   event.preventDefault();
@@ -71,10 +88,12 @@ var formatArrayAddToBookarkList = function () {
 }
 
 
+
 //event listener on delete button click
 $('main').on('click', '.delete-button', function (event) {
   var thisObjId = this.id;
   console.log(thisObjId);
+
   //remove bookmark from page
   $(this).closest('article').remove('article');
 
