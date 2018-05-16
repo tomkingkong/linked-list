@@ -9,22 +9,16 @@ var bookmarkAmount = document.querySelector('h4');
 var read = document.querySelector('.read');
 var linkedList = [];
 var listItemsFromStorage = JSON.parse(localStorage.getItem('list'));
-// console.log(listItemsFromStorage);
-// console.log(listItemsFromStorage[0].title, listItemsFromStorage[0].url);
+addToList.addEventListener('click', validationProcess);
+websiteTitleInput.addEventListener('keyup', submitEnable);
+websiteUrlInput.addEventListener('keyup', submitEnable);
 
 function ListItem(title, url) {
   this.title = title;
   this.url = url;
   this.id = Date.now();
   this.isRead = false;
-  //   if ($(this).hasClass('read') === true) {
-  //     this.isRead = true;
-  //   }
 }
-
-addToList.addEventListener('click', validationProcess);
-websiteTitleInput.addEventListener('keyup', submitEnable);
-websiteUrlInput.addEventListener('keyup', submitEnable);
 
 function validationProcess() {
   var theUrl = document.querySelector('.website-url-input').value;
@@ -97,15 +91,12 @@ var formatArrayAddToBookarkList = function () {
 //event listener on delete button click
 $('main').on('click', '.delete-button', function (event) {
   var thisObjId = this.id;
-  // console.log(thisObjId);
   //remove bookmark from page
   $(this).closest('article').remove('article');
-
   //return list
   var updatedList = linkedList.filter(function (obj) {
     return obj.id != thisObjId;
   });
-  // console.log(updatedList);
   linkedList = updatedList;
   //stringify and set linkedList array to localStorage
   var listItemsStringed = JSON.stringify(linkedList);
