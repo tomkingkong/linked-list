@@ -87,7 +87,7 @@ var addItemToBookmarkList = function() {
     if (linkedList[i].isRead == true) {
       bookmarkCard += `<article class="bookmark-block read">
 <h2 class="website-title">${linkedList[i].title}</h2>
-<p class="website-url"><a href="${linkedList[i].url}">${
+<p class="website-url"><a target="_blank" href="${linkedList[i].url}">${
         linkedList[i].url
       }</a></p>
 <div class="read-and-delete">
@@ -98,7 +98,7 @@ var addItemToBookmarkList = function() {
     } else {
       bookmarkCard += `<article class="bookmark-block">
       <h2 class="website-title">${linkedList[i].title}</h2>
-      <p class="website-url"><a href="${linkedList[i].url}">${
+      <p class="website-url"><a target="_blank" href="${linkedList[i].url}">${
         linkedList[i].url
       }</a></p>
       <div class="read-and-delete">
