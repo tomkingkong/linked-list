@@ -4,48 +4,27 @@ var websiteUrlInput = document.querySelector('.website-url-input');
 var addToList = document.querySelector('.submit');
 var readButton = document.querySelector('.read-button');
 
-var websiteTitle = document.querySelector('.website-title');
-var websiteUrl = document.querySelector('.website-url');
-
 var bookList = document.querySelector('.bookmark-section');
-var bookmarkAmount = document.querySelector('h4');
 
-var read = document.querySelector('.read');
+// var websiteTitleInput = $('.website-title-input');
+// var websiteUrlInput = $('.website-url-input');
+// var addToList = $('.submit');
+// var readButton = $('.read-button');
+// var bookList = $('.bookmark-section');
 
 var linkedList = [];
 
-var submitAudio = document.querySelector('.submit-audio');
-var deleteAudio = document.querySelector('.delete-audio');
-
-function playSubmitAudio() {
-  submitAudio.play();
-}
-
-function playDeleteAudio() {
-  deleteAudio.play();
-}
-
-
-
-//bookmark tallys
-$('h4').text('Bookmarks: ' + linkedList.length);
-$('h5').text('Read: ' + $('.read').length);
-$('h6').text(
-  'Unread: ' + (parseInt(linkedList.length) - parseInt($('.read').length))
-);
-
-function ListItem(title, url) {
-  this.title = title;
-  this.url = url;
-  this.id = Date.now();
-  this.isRead = false;
-}
+$('.clear-read').on('click', clearAllRead);
+$('main').on('click', '.read-button', isNowRead);
+$('main').on('click', '.delete-button', deleteBookmark);
 
 $(document).ready(function () {
   var listFromStorage = localStorage.getItem('list');
   if (listFromStorage !== null) {
     getListItemsAndAdd();
+    updateTally();
   }
+  updateTally();
 });
 
 $(window).on('storage', function () {
@@ -57,18 +36,26 @@ $('form').on('submit', function (event) {
   if (validationProcess() === true) {
     addListToStorage();
     addItemToBookmarkList();
-
     clearForm();
-    playSubmitAudio();
-    $('h4').text('Bookmarks: ' + linkedList.length);
-    $('h5').text('Read: ' + $('.read').length);
-    $('h6').text(
-      'Unread: ' + (parseInt(linkedList.length) - parseInt($('.read').length))
-    );
+    updateTally();
   } else {
     return false;
   }
 });
+
+function updateTally() {
+  $('h4').text('Bookmarks: ' + linkedList.length);
+  $('h5').text('Read: ' + $('.read').length);
+  $('h6').text('Unread: ' + (parseInt(linkedList.length) - parseInt($('.read').length)));
+}
+
+function ListItem(title, url) {
+  this.title = title;
+  this.url = url;
+  this.id = Date.now();
+  this.isRead = false;
+}
+
 
 function addListToStorage() {
   var websiteTitleValue = websiteTitleInput.value;
@@ -84,11 +71,7 @@ function getListItemsAndAdd() {
   var parsedList = JSON.parse(listFromStorage);
   linkedList = parsedList;
   linkedList.forEach(addItemToBookmarkList);
-  $('h4').text('Bookmarks: ' + linkedList.length);
-  $('h5').text('Read: ' + $('.read').length);
-  $('h6').text(
-    'Unread: ' + (parseInt(linkedList.length) - parseInt($('.read').length))
-  );
+  updateTally();
 }
 
 var clearForm = function () {
@@ -101,97 +84,60 @@ var addItemToBookmarkList = function () {
   for (var i = 0; i < linkedList.length; i++) {
     if (linkedList[i].isRead == true) {
       bookmarkCard += `<article class="bookmark-block read">
-<h2 class="website-title">${linkedList[i].title}</h2>
-<p class="website-url"><a target="_blank" href="${linkedList[i].url}">${
-        linkedList[i].url
-      }</a></p>
-<div class="read-and-delete">
-  <button class="read-button readit" id="${linkedList[i].id}">Read</button>
-  <button class="delete-button" id="${linkedList[i].id}">Delete</button>
-</div>
-</article>`;
+        <h2 class="website-title">${linkedList[i].title}</h2>
+        <p class="website-url"><a target="_blank" href="${linkedList[i].url}">${linkedList[i].url}</a></p>
+        <div class="read-and-delete">
+          <button class="read-button readit" id="${linkedList[i].id}">Read</button>
+          <button class="delete-button" id="${linkedList[i].id}">Delete</button>
+        </div>
+        </article>`;
     } else {
       bookmarkCard += `<article class="bookmark-block">
-      <h2 class="website-title">${linkedList[i].title}</h2>
-      <p class="website-url"><a target="_blank" href="${linkedList[i].url}">${
-        linkedList[i].url
-      }</a></p>
-      <div class="read-and-delete">
-        <button class="read-button readit" id="${
-          linkedList[i].id
-        }">Read</button>
-        <button class="delete-button" id="${linkedList[i].id}">Delete</button>
-      </div>
-      </article>`;
+        <h2 class="website-title">${linkedList[i].title}</h2>
+        <p class="website-url"><a target="_blank" href="${linkedList[i].url}">${linkedList[i].url}</a></p>
+        <div class="read-and-delete">
+          <button class="read-button readit" id="${linkedList[i].id}">Read</button>
+          <button class="delete-button" id="${linkedList[i].id}">Delete</button>
+        </div>
+        </article>`;
     }
   }
   bookList.innerHTML = bookmarkCard;
 };
 
-//event listener on delete button click
-$('main').on('click', '.delete-button', function (event) {
+function deleteBookmark() {
   var thisObjId = this.id;
-
-  //remove bookmark from page
-  $(this)
-    .closest('article')
-    .remove('article');
-
-  //return list
+  $(this).closest('article').remove('article');
   var updatedList = linkedList.filter(function (obj) {
     return obj.id != thisObjId;
   });
-
   linkedList = updatedList;
-
   var listItemsStringed = JSON.stringify(linkedList);
   localStorage.setItem('list', listItemsStringed);
-  playDeleteAudio();
-  $('h4').text('Bookmarks: ' + linkedList.length);
-  $('h5').text('Read: ' + $('.read').length);
-  $('h6').text(
-    'Unread: ' + (parseInt(linkedList.length) - parseInt($('.read').length))
-  );
-});
+  updateTally();
+}
 
-//mark as read
-$('main').on('click', '.read-button', function () {
-  $(this)
-    .closest('article')
-    .toggleClass('read');
-
+function isNowRead() {
+  $(this).closest('article').toggleClass('read');
   var thisObjId = this.id;
-
   var itemUpdate = linkedList.find(function (obj) {
     if (obj.id == thisObjId) {
       obj.isRead = !obj.isRead;
-
       return obj;
     }
   });
-
   var updatedList = linkedList.filter(function (obj) {
     return obj.id != thisObjId;
   });
-
   linkedList = updatedList;
-
   linkedList.push(itemUpdate);
-
   var listItemsStringed = JSON.stringify(linkedList);
   localStorage.setItem('list', listItemsStringed);
-
-  $('h5').text('Read: ' + $('.read').length);
-  $('h6').text(
-    'Unread: ' + (parseInt(linkedList.length) - parseInt($('.read').length))
-  );
-});
-
-$('.clear-read').on('click', clearAllRead);
+  updateTally();
+}
 
 function clearAllRead() {
   var listFromStorage = JSON.parse(localStorage.getItem('list'));
-
   var unreadList = listFromStorage.filter(function (obj) {
     return obj.isRead == false;
   });
@@ -199,12 +145,7 @@ function clearAllRead() {
   linkedList = unreadList;
   var listItemsStringed = JSON.stringify(linkedList);
   localStorage.setItem('list', listItemsStringed);
-  playDeleteAudio();
-  $('h4').text('Bookmarks: ' + linkedList.length);
-  $('h5').text('Read: ' + $('.read').length);
-  $('h6').text(
-    'Unread: ' + (parseInt(linkedList.length) - parseInt($('.read').length))
-  );
+  updateTally();
 }
 
 function validationProcess() {
