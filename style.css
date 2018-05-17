@@ -33,9 +33,27 @@ h3 {
   display: flex;
   justify-content: center;
 }
+
 h4 {
+  margin: 0 32%;
+  text-align: right;
   color: #ffc107;
 }
+
+h5 {
+  margin: 0 32%;
+  text-align: right;
+  font-size: .8em;
+  color: #ffc107;
+}
+
+h6 {
+  margin: 0 32%;
+  text-align: right;
+  font-size: .8em;
+  color: #ffc107;
+}
+
 .wrapper {
   display: grid;
   min-height: 100vh;
@@ -113,11 +131,11 @@ main article {
 }
 
 main article p {
+  height: auto;
   color: #607d8b;
   padding: 1em 0;
   border-top: 1px solid #cfd8dc;
   border-bottom: 1px solid #cfd8dc;
-  overflow: hidden;
   width: 100%;
 }
 
@@ -132,6 +150,7 @@ main article p a:hover {
   color: #455a64;
   text-decoration: underline #ffc107;
 }
+
 
 .read-and-delete {
   color: #455a64;
@@ -159,7 +178,7 @@ main article p a:hover {
   background-color: #F2F4F4;
 }
 
-.read #read {
+.read .readit {
   outline: 0;
   border: 0;
   color: #F05A28; 
@@ -219,6 +238,7 @@ main article p a:hover {
  }
  main article {
    margin: 3% 0;
+
  }
 }
 
@@ -230,6 +250,7 @@ main article p a:hover {
   }
   main article {
     width: 90%;
+
   }
 }
 
