@@ -14,7 +14,7 @@ var read = document.querySelector('.read');
 
 var linkedList = [];
 
-//total bookmark TODO:Fix on refresh
+//total bookmark
 $('h4').text('Bookmarks: ' + linkedList.length);
 $('h5').text('Read: ' + $('.read').length);
 $('h6').text(
@@ -84,18 +84,33 @@ var clearForm = function() {
 var addItemToBookmarkList = function() {
   var bookmarkCard = '';
   for (var i = 0; i < linkedList.length; i++) {
-    bookmarkCard += `<article class="bookmark-block">
+    if (linkedList[i].isRead == true) {
+      bookmarkCard += `<article class="bookmark-block read">
 <h2 class="website-title">${linkedList[i].title}</h2>
 <p class="website-url"><a href="${linkedList[i].url}">${
-      linkedList[i].url
-    }</a></p>
+        linkedList[i].url
+      }</a></p>
 <div class="read-and-delete">
   <button class="read-button readit" id="${linkedList[i].id}">Read</button>
   <button class="delete-button" id="${linkedList[i].id}">Delete</button>
 </div>
 </article>`;
-    bookList.innerHTML = bookmarkCard;
+    } else {
+      bookmarkCard += `<article class="bookmark-block">
+      <h2 class="website-title">${linkedList[i].title}</h2>
+      <p class="website-url"><a href="${linkedList[i].url}">${
+        linkedList[i].url
+      }</a></p>
+      <div class="read-and-delete">
+        <button class="read-button readit" id="${
+          linkedList[i].id
+        }">Read</button>
+        <button class="delete-button" id="${linkedList[i].id}">Delete</button>
+      </div>
+      </article>`;
+    }
   }
+  bookList.innerHTML = bookmarkCard;
 };
 
 //event listener on delete button click
@@ -172,6 +187,11 @@ function clearAllRead() {
 
   var listItemsStringed = JSON.stringify(linkedList);
   localStorage.setItem('list', listItemsStringed);
+  $('h4').text('Bookmarks: ' + linkedList.length);
+  $('h5').text('Read: ' + $('.read').length);
+  $('h6').text(
+    'Unread: ' + (parseInt(linkedList.length) - parseInt($('.read').length))
+  );
 }
 
 function validationProcess() {
