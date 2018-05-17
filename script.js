@@ -14,7 +14,20 @@ var read = document.querySelector('.read');
 
 var linkedList = [];
 
-//total bookmark
+var submitAudio = document.querySelector('.submit-audio');
+var deleteAudio = document.querySelector('.delete-audio');
+
+function playSubmitAudio() {
+  submitAudio.play();
+}
+
+function playDeleteAudio() {
+  deleteAudio.play();
+}
+
+
+
+//bookmark tallys
 $('h4').text('Bookmarks: ' + linkedList.length);
 $('h5').text('Read: ' + $('.read').length);
 $('h6').text(
@@ -28,23 +41,25 @@ function ListItem(title, url) {
   this.isRead = false;
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
   var listFromStorage = localStorage.getItem('list');
   if (listFromStorage !== null) {
     getListItemsAndAdd();
   }
 });
 
-$(window).on('storage', function() {
+$(window).on('storage', function () {
   getListItemsAndAdd();
 });
 
-$('form').on('submit', function(event) {
+$('form').on('submit', function (event) {
   event.preventDefault();
   if (validationProcess() === true) {
     addListToStorage();
     addItemToBookmarkList();
+
     clearForm();
+    playSubmitAudio();
     $('h4').text('Bookmarks: ' + linkedList.length);
     $('h5').text('Read: ' + $('.read').length);
     $('h6').text(
@@ -76,12 +91,12 @@ function getListItemsAndAdd() {
   );
 }
 
-var clearForm = function() {
+var clearForm = function () {
   websiteTitleInput.value = '';
   websiteUrlInput.value = '';
 };
 
-var addItemToBookmarkList = function() {
+var addItemToBookmarkList = function () {
   var bookmarkCard = '';
   for (var i = 0; i < linkedList.length; i++) {
     if (linkedList[i].isRead == true) {
@@ -114,7 +129,7 @@ var addItemToBookmarkList = function() {
 };
 
 //event listener on delete button click
-$('main').on('click', '.delete-button', function(event) {
+$('main').on('click', '.delete-button', function (event) {
   var thisObjId = this.id;
 
   //remove bookmark from page
@@ -123,7 +138,7 @@ $('main').on('click', '.delete-button', function(event) {
     .remove('article');
 
   //return list
-  var updatedList = linkedList.filter(function(obj) {
+  var updatedList = linkedList.filter(function (obj) {
     return obj.id != thisObjId;
   });
 
@@ -131,7 +146,7 @@ $('main').on('click', '.delete-button', function(event) {
 
   var listItemsStringed = JSON.stringify(linkedList);
   localStorage.setItem('list', listItemsStringed);
-
+  playDeleteAudio();
   $('h4').text('Bookmarks: ' + linkedList.length);
   $('h5').text('Read: ' + $('.read').length);
   $('h6').text(
@@ -140,14 +155,14 @@ $('main').on('click', '.delete-button', function(event) {
 });
 
 //mark as read
-$('main').on('click', '.read-button', function() {
+$('main').on('click', '.read-button', function () {
   $(this)
     .closest('article')
     .toggleClass('read');
 
   var thisObjId = this.id;
 
-  var itemUpdate = linkedList.find(function(obj) {
+  var itemUpdate = linkedList.find(function (obj) {
     if (obj.id == thisObjId) {
       obj.isRead = !obj.isRead;
 
@@ -155,7 +170,7 @@ $('main').on('click', '.read-button', function() {
     }
   });
 
-  var updatedList = linkedList.filter(function(obj) {
+  var updatedList = linkedList.filter(function (obj) {
     return obj.id != thisObjId;
   });
 
@@ -177,16 +192,14 @@ $('.clear-read').on('click', clearAllRead);
 function clearAllRead() {
   var listFromStorage = JSON.parse(localStorage.getItem('list'));
 
-  var unreadList = listFromStorage.filter(function(obj) {
+  var unreadList = listFromStorage.filter(function (obj) {
     return obj.isRead == false;
   });
-
   $('.read').remove();
-
   linkedList = unreadList;
-
   var listItemsStringed = JSON.stringify(linkedList);
   localStorage.setItem('list', listItemsStringed);
+  playDeleteAudio();
   $('h4').text('Bookmarks: ' + linkedList.length);
   $('h5').text('Read: ' + $('.read').length);
   $('h6').text(
