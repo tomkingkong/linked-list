@@ -166,6 +166,8 @@ function clearAllRead() {
     return obj.isRead == false;
   });
 
+  $('.read').remove();
+
   linkedList = unreadList;
 
   var listItemsStringed = JSON.stringify(linkedList);
@@ -174,6 +176,7 @@ function clearAllRead() {
 
 function validationProcess() {
   var theUrl = document.querySelector('.website-url-input').value;
+  //this is not our code, but it works like a fucking charm
   var pattern = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
   if (websiteUrlInput.value === '' || websiteTitleInput.value === '') {
     alert('ERROR: Please enter Bookmark Information');
